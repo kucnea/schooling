@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+	body{
+		background-color : red;
+	}
+	h3{
+		text-align : center;
+	}
+	#pig{
+		width : 500px;
+		heigh : 500px;
+		margin-right : auto;
+		margin-left : 150px;
+	}
+	h2{
+		text-align : center;
+	}
+</style>
+<script>
+	function show(){
+		document.getElementById("pig").src = "https://ichef.bbci.co.uk/news/976/cpsprodpb/4919/production/_123331781_pig.jpg";
+	}
+	function hide(){
+		document.getElementById("pig").src = "";
+	}
+</script>
+</head>
+<body>
+<h3 onmouseover=show() onmouseout=hide()>hi</h3>
+<div><img id="pig" src=""></div>
+<input type="button" value="버튼1" onclick=show()>
+<input type="button" value="버튼2" onclick=hide()>
+<h2>its pig.</h2>
+</body>
+</html>
