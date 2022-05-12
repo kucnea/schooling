@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>이민호</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <!-- 한 건만 파일 제출이 가능하여 css파일을 별도로 만들지 않음. -->
+    <style>
+        table{
+            border: 1px solid;
+            width : 100%;
+            text-align: center;
+        }
+        th,td{
+            border: 1px solid;
+        }
+        #name{
+            width: 65px;
+        }
+        select{
+            width: 150px;
+        }
+        #rightDiv{
+            float: right;
+        }
+        input{
+            width: 150px
+        }
+    </style>
+
+</head>
+<body>
+    <h1>이민호네 SYSTEM 직원</h1>
+
+    이름
+    <input type="text" id="name">
+
+    부서
+    <select id="dept">
+        <option value="gyung">경영관리</option>
+        <option value="gyung">행정관리</option>
+    </select>
+
+    직급
+    <select id="class">
+        <option value="level1">전임</option>
+        <option value="level1">후임</option>
+    </select>
+    
+    입사일
+    <input type="text" id="insertDate">
+
+    이메일
+    <input type="email" id="eMail">
+    <div id="rightDiv">
+        검색
+        <input type="text" id="search">
+
+        <input type="button" value="등록" onclick="insert()">
+        <input type="button" value="초기화">
+    </div>
+
+    <br><br>
+    <script>
+        var num = 0;
+        function insert(){
+            var body = document.getElementById("tbody");
+            var t1 = document.getElementById("name").value;
+            var t2 = document.getElementById("dept").value;
+            var t3 = document.getElementById("class").value;
+            var t4 = document.getElementById("insertDate").value;
+                var y = t4.substr(0, 4);
+                var m = t4.substr(5, 2);
+                var d = t4.substr(8, 2);
+                var insertD = new Date(y,m,d);
+                var diff = insertD - new Date();
+                var currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+                var currMonth = currDay * 30;// 월 만듬
+                var currYear = currMonth * 12; // 년 만듬
+            var t6 = parseInt(diff/currYear);    
+            var t5 = document.getElementById("eMail").value;
+            var newHTML = 
+                '<tr>' +
+                    '<td>'+num+'</td>' +
+                    '<td>'+t1+'</td>' +
+                    '<td>'+t2+'</td>' +
+                    '<td>'+t3+'</td>' +
+                    '<td>'+t4+'</td>' +
+                    '<td>'+t6+'</td>' +
+                    '<td>'+t5+'</td>' +
+                    '<th width = 8%>'+'<input type="button" value="수정" style="width:70%">'+'</th>' +
+                    '<th width = 8%>'+'<input type="button" value="삭제" style="width:70%">'+'</th>' +
+                '</tr>';
+                num = num + 1;
+            body.innerHTML = body.innerHTML + newHTML;
+        }
+    </script>
+    <table name="table">
+        <tr>
+            <th>#</th>
+            <th>이름</th>
+            <th>부서</th>
+            <th>직급</th>
+            <th>입사일</th>
+            <th>근속연수</th>
+            <th>이메일</th>
+            <th width = 8%>수정</th>
+            <th width = 8%>삭제</th>
+        </tr>
+        <tbody id="tbody"></tbody>
+        <div id="innerTable"></div>
+    </table>
+    
+
+</body>
+</html>
