@@ -35,36 +35,38 @@
     <h1>이민호네 SYSTEM 직원</h1>
 
     이름
-    <input type="text" id="name">
+<form>
+    <input type="text" id="name" value="">
 
     부서
     <select id="dept">
-        <option value="gyung">경영관리</option>
-        <option value="gyung">행정관리</option>
+        <option value="경영관리" selected>경영관리</option>
+        <option value="행정관리">행정관리</option>
     </select>
 
     직급
     <select id="class">
-        <option value="level1">전임</option>
-        <option value="level1">후임</option>
+        <option value="전임" selected>전임</option>
+        <option value="후임">후임</option>
     </select>
     
     입사일
-    <input type="text" id="insertDate">
+    <input type="text" id="insertDate" value="">
 
     이메일
-    <input type="email" id="eMail">
+    <input type="email" id="eMail" value="">
     <div id="rightDiv">
         검색
         <input type="text" id="search">
 
         <input type="button" value="등록" onclick="insert()">
-        <input type="button" value="초기화">
+        <input type="reset" value="초기화">
     </div>
+</form>
 
     <br><br>
     <script>
-        var num = 0;
+        var num = 1;
         function insert(){
             var body = document.getElementById("tbody");
             var t1 = document.getElementById("name").value;
@@ -79,22 +81,40 @@
                 var currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
                 var currMonth = currDay * 30;// 월 만듬
                 var currYear = currMonth * 12; // 년 만듬
-            var t6 = parseInt(diff/currYear);    
+                var t6 = -parseInt(diff/currYear);    
             var t5 = document.getElementById("eMail").value;
             var newHTML = 
-                '<tr>' +
+                '<tr id="tr_'+num+'">' +
                     '<td>'+num+'</td>' +
-                    '<td>'+t1+'</td>' +
-                    '<td>'+t2+'</td>' +
-                    '<td>'+t3+'</td>' +
-                    '<td>'+t4+'</td>' +
+                    '<td id="td_name_'+num+'">'+t1+'</td>' +
+                    '<td id="td_dept_'+num+'">'+t2+'</td>' +
+                    '<td id="td_class_'+num+'">'+t3+'</td>' +
+                    '<td id="td_insertDate_'+num+'">'+t4+'</td>' +
                     '<td>'+t6+'</td>' +
-                    '<td>'+t5+'</td>' +
-                    '<th width = 8%>'+'<input type="button" value="수정" style="width:70%">'+'</th>' +
-                    '<th width = 8%>'+'<input type="button" value="삭제" style="width:70%">'+'</th>' +
+                    '<td id="td_eMail_'+num+'">'+t5+'</td>' +
+                    '<th width = 8%>'+'<input type="button" value="수정" style="width:70%" onclick="updateMember('+num+')">'+'</th>' +
+                    '<th width = 8%>'+'<input type="button" value="삭제" style="width:70%" onclick="deleteMember('+num+')">'+'</th>' +
                 '</tr>';
                 num = num + 1;
             body.innerHTML = body.innerHTML + newHTML;
+        }
+    </script>
+    <script>
+        function updateMember(numId){
+            var bfName = document.getElementById("td_name_"+numId).textContent;
+            var bfDept = document.getElementById("td_dept_"+numId).textContent;
+            var bfClass = document.getElementById("td_class_"+numId).textContent;
+            var bfInsertDate = document.getElementById("td_insertDate_"+numId).textContent;
+            var bfEMail = document.getElementById("td_eMail_"+numId).textContent;
+            document.getElementById("name").value = bfName;
+            document.getElementById("dept").value = bfDept;
+            document.getElementById("class").value = bfClass;
+            document.getElementById("insertDate").value = bfInsertDate;
+            document.getElementById("eMail").value = bfEMail;
+            document.getElementById("tr_"+numId).remove();
+        }
+        function deleteMember(numId){
+            document.getElementById("tr_"+numId).remove();
         }
     </script>
     <table name="table">
